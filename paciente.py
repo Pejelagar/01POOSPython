@@ -4,9 +4,9 @@ class Paciente:
 
     def __init__(self, rut:str, nombre:str, edad:int,prevision:str):
         self.rut = rut
-        self.nombre=nombre
-        self.edad=edad
-        self.prevision=prevision
+        self.nombre = nombre
+        self.edad = edad
+        self.prevision = prevision
 
     @property
     def rut(self)-> str:
@@ -14,7 +14,9 @@ class Paciente:
 
     @rut.setter
     def rut(self,rut:str)-> None:
-        self._rut = rut
+        if not isinstance(rut,str) or not rut.strip():
+            raise ValueError("El RUT no puede estar vacío!")
+        self._rut = rut.strip().upper()
 
     @property
     def nombre(self)-> str:
@@ -22,7 +24,9 @@ class Paciente:
 
     @nombre.setter
     def nombre(self,nombre:str)-> None:
-        self._nombre = nombre
+        if not isinstance(nombre,str) or not len(nombre.strip()) > 2:
+            raise ValueError("El nombre debe tener al menos 2 caracteres!")
+        self._nombre = nombre.strip().upper()
 
     @property
     def edad(self)->int:
@@ -30,6 +34,10 @@ class Paciente:
 
     @edad.setter
     def edad(self,edad:int)-> None:
+        if not isinstance(edad,int):
+            raise TypeError("La edad debe ser un número entero!")
+        if edad < 0 or edad > 125:
+            raise ValueError("La edad debe ser un valor biológicamente válido! (entre 0 y 125 años)")
         self._edad=edad
 
     @property
@@ -38,7 +46,13 @@ class Paciente:
 
     @prevision.setter
     def prevision(self,prevision:str)-> None:
-        self._prevision=prevision
+        if not isinstance(prevision, str):
+            raise TypeError("La prevision debe ser una cadena de texto.")
+        prevision_limpio = prevision.strip().capitalize()
+        if prevision_limpio not in self.PREVISIONES_VALIDAS:
+            opciones = ", ".join(self.PREVISIONES_VALIDAS)
+            raise ValueError(f"Previsión '{prevision}' no válida. Opciones permitidas: {opciones}")
+        self._prevision=prevision_limpio
 
     def __str__(self)-> str:
         return f"Información del paciente:\nRUT: {self.rut}\nNombre: {self.nombre}\nEdad: {self.edad}\nPrevisión: {self.prevision}"
