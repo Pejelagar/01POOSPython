@@ -1,6 +1,8 @@
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 from paciente import Paciente
 import paciente
+
+ENTER = "Enter para continuar..."
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 pacientes:list[Paciente]=[
     Paciente("11.111.111-1","Gaspar Galves",30,"Fonasa"),
@@ -15,7 +17,7 @@ def leer_numero(mensaje:str)->int:
         except ValueError:
             print("!): Debe ingresar un número entero.")
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-def menu():
+def menu_paciente():
     print("=" * 20)
     print("Menú Clínica")
     print("=" * 20)
@@ -63,7 +65,7 @@ def imprimir_pacientes()->None:
         for paciente in pacientes:
             print(paciente)
             print("-" * 20)
-    input("Enter para continuar...")
+    input(ENTER)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def buscar_paciente()->paciente:
     rut = input("Ingrese el rut del paciente: ")
@@ -79,7 +81,7 @@ def imprimir_paciente()->None:
         print(paciente)
     else:
         print("No se encontró el paciente.")
-    input("Enter para continuar...")
+    input(ENTER)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def eliminar_paciente()->None:
     paciente=buscar_paciente()
@@ -88,8 +90,10 @@ def eliminar_paciente()->None:
         print("Paciente eliminado.")
     else:
         print("No me encontraras. No me pondras las manos encima. Ríndete. Césa tu vana búsqueda y abandona toda esperanza de encontrarme. Púdrete.")
-    input("Enter para continuar...")
+    input(ENTER)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+UPDATE = "Prevision actualizada"
+
 def editar_paciente()->None:
     paciente = buscar_paciente()
     if paciente:
@@ -117,25 +121,25 @@ def editar_paciente()->None:
             op=leer_numero("Seleccione una previsión: ")
             if op == 1:
                 paciente.prevision = "Fonasa"
-                print("Prevision actualizada")
+                print(UPDATE)
             elif op == 2:
                 paciente.prevision = "Isapre"
-                print("Prevision actualizada")
+                print(UPDATE)
             elif op == 3:
                 paciente.prevision = "Particular"
-                print("Prevision actualizada")
+                print(UPDATE)
             elif op == 4:
                 paciente.prevision = "Otro"
-                print("Prevision actualizada")
+                print(UPDATE)
             else:
                 print("Opción Inválida")
     else:
         print("No se encontro al paciente blehhhh")
-    input("Enter para continuar...")
+    input(ENTER)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def main():
     while True:
-        opcion=menu()
+        opcion=menu_paciente()
         if opcion == 1:
             print("Agregar paciente")
             agregar_paciente()
@@ -152,10 +156,26 @@ def main():
             print("Mostrar todos los pacientes")
             imprimir_pacientes()
         elif opcion == 0:
-            print("Programa terminado.")
+            print("Saliendo...")
             break
         else:
             print("Opción no válida. Intente de nuevo.")
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def menu_dep():
+    print("=" * 20)
+    print("Menú Clínica")
+    print("=" * 20)
+    print("1.- Agregar departamento")
+    print("2.- Editar departamento")
+    print("3.- Eliminar departamento")
+    print("4.- Mostrar un departamento")
+    print("5.- Mostrar todos los departamento")
+    print("0.- Salir")
+    op = leer_numero("Ingrese una opción:")
+    print("=" * 20)
+    return op
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 if __name__=="__main__":
     main()
