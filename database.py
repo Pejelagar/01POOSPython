@@ -25,7 +25,7 @@ class Database:
             cursor.execute("""
             CREATE TABLE IF NOT EXISTS departamento (
                 id_dep INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL
+                nombre TEXT NOT NULL,
                 piso INTEGER NOT NULL
                 )
             """)
@@ -37,7 +37,7 @@ class Database:
                 edad INTEGER NOT NULL,
                 prevision TEXT NOT NULL,
                 id_dep INTEGER,
-                FOREIGN KEY(id_depa) REFERENCES departamento(id_dep) ON DELETE SET NULL
+                FOREIGN KEY(id_dep) REFERENCES departamento(id_dep) ON DELETE SET NULL
                 )
             """)
 

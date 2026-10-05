@@ -10,7 +10,7 @@ class Departamento:
         return self._id_dep
 
     @id_dep.setter
-    def rut(self,id_dep:int)-> None:
+    def id_dep(self,id_dep:int)-> None:
         if not isinstance(id_dep,int) or not id_dep.strip():
             raise ValueError("El ID no puede estar vacío!")
         self._id_dep = id_dep.strip().upper()
