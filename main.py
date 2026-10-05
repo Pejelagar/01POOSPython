@@ -211,15 +211,88 @@ departamentos:list[Departamento]=[
 ]
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def agregar_departamento():
-    id_dep = leer_numero("Asigne un ID al departamento: ")
-    nombre_dep = input("Ingrese nombre del departamento: ")
-    piso = leer_numero("Ingrese el piso del departamento: ")
-    departamento = Departamento(id_dep,nombre_dep,piso)
+    id_dep = input("Asigne un ID al departamento: ")
+    nombre = input("Ingrese nombre del departamento: ")
+    piso = leer_numero("Ingrese edad del departamento: ")
+    try:
+        departamento=Departamento(id_dep,nombre,piso)
+    except(ValueError,TypeError) as e:
+        print(f"Error al crear paciente: {e}")
+        return
     departamentos.append(departamento)
-    print("Paciente agregado exitosamente")
-    print(f"Total pacientes registrados:{len(pacientes)}")
+    print("Departamento agregado exitosamente")
+    print(f"Total pacientes registrados: {len(departamentos)}")
     input("Enter para continuar...")
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def imprimir_departamentos()->None:
+    if len(departamentos) == 0:
+        print("No hay departamentos.")
+    else:
+        for departamento in departamentos:
+            print(departamento)
+            print("-" * 20)
+    input(ENTER)
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def buscar_departamento()->Departamento:
+    id_dep = input("Ingrese el ID del departamento: ")
+    for p in departamentos:
+        if p.id_dep == id_dep:
+            return p
+        
+    return None
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def imprimir_departamento()->None:
+    departamento = buscar_departamento()
+    if departamento:
+        print(departamento)
+    else:
+        print("No se encontró el departamento.")
+    input(ENTER)
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def eliminar_departamento()->None:
+    departamento=buscar_departamento()
+    if departamento:
+        departamentos.remove(departamento)
+        print("Departamento eliminado.")
+    else:
+        print("No me encontraras. No me pondras las manos encima. Ríndete. Césa tu vana búsqueda y abandona toda esperanza de encontrarme. Púdrete.")
+    input(ENTER)
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+def editar_departamento()->None:
+    departamento = buscar_departamento()
+    if departamento:
+        print(departamento)
+        print("Menú de edición")
+        print("1.- Editar nombre")
+        print("2.- Editar piso")
+        print("0.- Salir")
+        op = leer_numero("Ingrese una opción: ")
+        if op == 1:
+            try:
+                nombre_nuevo = input("Ingrese nuevo nombre")
+                departamento.nombre = nombre_nuevo
+                print("Nombre actualizado.")
+            except(ValueError,TypeError) as e:
+                print(f"Error al editar departamento: {e}")
+                return
+        elif op == 2:
+            try:
+                piso_nuevo = leer_numero("Ingrese edad nueva")
+                departamento.piso = piso_nuevo
+                print("Edad actualizada.")
+            except(ValueError,TypeError) as e:
+                print(f"Error al editar departamento: {e}")
+                return
+    else:
+        print("No se encontro al departamento blehhhh")
+    input(ENTER)
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
 
 if __name__=="__main__":
     main()

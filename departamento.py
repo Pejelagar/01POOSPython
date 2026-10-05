@@ -11,7 +11,9 @@ class Departamento:
 
     @id_dep.setter
     def rut(self,id_dep:int)-> None:
-        self._id_dep = id_dep
+        if not isinstance(id_dep,int) or not id_dep.strip():
+            raise ValueError("El ID no puede estar vacío!")
+        self._id_dep = id_dep.strip().upper()
 
     @property
     def nombre(self)-> str:
@@ -19,7 +21,9 @@ class Departamento:
 
     @nombre.setter
     def nombre(self,nombre:str)-> None:
-        self._nombre = nombre
+        if not isinstance(nombre,str) or not len(nombre.strip()) > 2:
+            raise ValueError("El nombre debe tener al menos 2 caracteres!")
+        self._nombre = nombre.strip().upper()
 
     @property
     def piso(self)->int:
@@ -27,7 +31,9 @@ class Departamento:
 
     @piso.setter
     def piso(self,piso:int)-> None:
-        self._piso = piso
+        if not isinstance(piso,int):
+            raise TypeError("El piso debe ser un número entero!")
+        self._edad=piso
 
     def __str__(self)-> str:
         return f"Informacion del departamento:\nID: {self.id_dep}\nNombre: {self.nombre}\nPiso: {self.piso}"
